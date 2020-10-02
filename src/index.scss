@@ -1,3 +1,5 @@
+$terminal-text-color: white;
+
 body {
   margin: 0;
   padding: .5rem;
@@ -16,10 +18,17 @@ code {
     monospace;
 }
 
-#console {
+#terminal {
+  color: $terminal-text-color;
+
   p {
-    color: darkgrey;
-    font-weight: bold;
+    display: inline;
+  }
+
+  .command {
+    input {
+      opacity: 0
+    }
   }
 
   .cursor {
@@ -28,5 +37,5 @@ code {
 }
 
 @keyframes cursor-blink { 
-  50% { border-left: .5rem solid darkgrey; }
+  50% { border-left: .5rem solid $terminal-text-color; }
 }

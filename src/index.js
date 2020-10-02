@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
-import Console from './Console';
+import Terminal from './Terminal';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Console />
+    <Terminal />
   </React.StrictMode>,
   document.getElementById('root')
 );
