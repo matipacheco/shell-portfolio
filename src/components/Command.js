@@ -67,6 +67,7 @@ export function CommandLine() {
         type="text"
         value={command}
         ref={commandRef}
+        id="command-input"
         onChange={ (event) => setCommand(event.target.value) }
       />
     </div>
