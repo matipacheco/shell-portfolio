@@ -1,19 +1,31 @@
 import React, { useState, useRef, useEffect, Fragment } from 'react';
 
-
-export default function Command(props) {
+export default function CommandLine(props) {
   let commandRef = useRef(null);
   const [command, setCommand] = useState("");
-  const [commandSubmitted] = useState(false);
+  const [commandSubmitted] = useState(props.input !== undefined);
 
   useEffect(() => {
+    if (commandSubmitted)
+      return;
+
     commandRef.current.focus();
+    commandRef.current.addEventListener("keydown", handleKeyDown)
   }, [])
+
+  const handleKeyDown = (event) => {
+    if (event.keyCode === 13) {
+      props.addCommand({
+        'index': props.index + 1,
+        'input': command,
+      })
+    }
+  }
 
   return (
     <div className="command">
       <p>
-        &gt;
+        &gt; &nbsp;
         {command}
       </p>
 
@@ -27,7 +39,6 @@ export default function Command(props) {
             onChange={(event) => setCommand(event.target.value)}
           />
         </Fragment>
-
       }
     </div>
   )
