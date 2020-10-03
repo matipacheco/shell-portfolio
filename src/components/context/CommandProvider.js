@@ -6,11 +6,12 @@ export default function ProviderWrapper(props) {
   const [commands, updateCommands] = useState(commandContext.commands);
 
   const addCommandToContext = (command) => {
-    const updatedList = commands.concat({
-      id: commands.length,
-      text: command
+    updateCommands((state) => {
+      return state.concat({
+        id: state.length,
+        text: command
+      });
     });
-    updateCommands(updatedList);
   }
 
   const provider = {

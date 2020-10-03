@@ -11,11 +11,20 @@ body {
   -moz-osx-font-smoothing: grayscale;
 
   background-color: black;
+  font-size: 1.2rem;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+@font-face {
+  font-family: 'ubuntu_monoregular';
+  src:  local('ubuntu_monoregular'), url('./fonts/ubuntu_mono/ubuntumono-regular-webfont.woff') format('woff'),
+        local('ubuntu_monoregular'), url('./fonts/ubuntu_mono/ubuntumono-regular-webfont.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
 }
 
 #terminal {
