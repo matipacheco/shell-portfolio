@@ -16,6 +16,7 @@ export function Command(props) {
         &gt; &nbsp;
         {props.text}
       </p>
+      {props.children}
     </div>
   )
 }
@@ -37,41 +38,36 @@ export function CommandList() {
   )
 }
 
-export function CommandLine() {
-  let commandRef = useRef(null);
-  const [command, setCommand] = useState("");
-  const commandContext = useContext(CommandContext);
+export const withInput = Component => {
+  return function() {
+    let commandRef = useRef(null);
+    const [command, setCommand] = useState("");
+    const commandContext = useContext(CommandContext);
+  
+    useEffect(() => {
+      commandRef.current.focus();
+      commandRef.current.addEventListener("keydown", handleKeyDown)
+    }, [])
 
-  useEffect(() => {
-    focusInput();
-    commandRef.current.addEventListener("keydown", handleKeyDown)
-  }, [])
-
-  const focusInput = () => {
-    commandRef.current.focus();
-  };
-
-  const handleKeyDown = (event) => {
-    if (event.keyCode === 13) {
-      commandContext.addCommandToContext(event.target.value);
-      setCommand("");
+    const handleKeyDown = (event) => {
+      if (event.keyCode === 13) {
+        commandContext.addCommandToContext(event.target.value);
+        setCommand("");
+      }
     }
+  
+    return (
+      <Component>
+        <Cursor />
+        <input
+          type="text"
+          value={command}
+          ref={commandRef}
+          id="command-input"
+          onChange={ (event) => setCommand(event.target.value) }
+        />
+      </Component>
+    )
   }
-
-  return (
-    <div className="command">
-      <p>
-        &gt; &nbsp;
-        {command}
-      </p>
-      <Cursor />
-      <input
-        type="text"
-        value={command}
-        ref={commandRef}
-        id="command-input"
-        onChange={ (event) => setCommand(event.target.value) }
-      />
-    </div>
-  )
 }
+

@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import React, { useEffect } from 'react';
 
-import { CommandLine, CommandList } from './Command';
+import { withInput, Command, CommandList } from './Command';
 import ProviderWrapper from './context/CommandProvider';
 
 export default function Terminal() {
@@ -10,6 +10,8 @@ export default function Terminal() {
       $('#command-input').focus();
     })
   }, []);
+
+  const CommandLine = withInput(Command);
 
   return (
     <ProviderWrapper>
