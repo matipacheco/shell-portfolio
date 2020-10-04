@@ -1,6 +1,7 @@
 import React, {
   useState, useRef, useEffect, useContext, Fragment
 } from 'react';
+import $ from 'jquery';
 import { CommandContext } from './context/CommandContext';
 
 function Cursor() {
@@ -12,8 +13,8 @@ function Cursor() {
 export function Command(props) {
   return (
     <div className="command">
+      &gt; &nbsp;
       <p>
-        &gt; &nbsp;
         {props.text}
       </p>
       {props.children}
@@ -41,7 +42,6 @@ export function CommandList() {
 export const withInput = Component => {
   return function() {
     let commandRef = useRef(null);
-    const [command, setCommand] = useState("");
     const commandContext = useContext(CommandContext);
   
     useEffect(() => {
@@ -49,10 +49,18 @@ export const withInput = Component => {
       commandRef.current.addEventListener("keydown", handleKeyDown)
     }, [])
 
+    const printCommand = (command) => {
+      $("#command-input").siblings('p').text(command)
+    }
+
     const handleKeyDown = (event) => {
       if (event.keyCode === 13) {
         commandContext.addCommandToContext(event.target.value);
-        setCommand("");
+        $("#command-input").val('');
+        printCommand("")
+
+      } else {
+        printCommand(event.target.value);
       }
     }
   
@@ -61,10 +69,8 @@ export const withInput = Component => {
         <Cursor />
         <input
           type="text"
-          value={command}
           ref={commandRef}
           id="command-input"
-          onChange={ (event) => setCommand(event.target.value) }
         />
       </Component>
     )
