@@ -1,7 +1,8 @@
 import { createContext } from 'react';
 
 export const CommandContext = createContext({
-  commands: []
+  commands: [],
+  directoryTree: ["home", "mati"]
 });
 
 export const CommandProvider = CommandContext.Provider;

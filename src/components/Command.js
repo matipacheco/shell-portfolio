@@ -1,4 +1,6 @@
-import React, { useState, useRef, useEffect, useContext, Fragment } from 'react';
+import React, {
+  useState, useRef, useEffect, useContext, Fragment
+} from 'react';
 import { CommandContext } from './context/CommandContext';
 
 function Cursor() {

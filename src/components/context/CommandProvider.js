@@ -4,6 +4,7 @@ import { CommandContext, CommandProvider } from './CommandContext';
 export default function ProviderWrapper(props) {
   const commandContext = useContext(CommandContext);
   const [commands, updateCommands] = useState(commandContext.commands);
+  const [directoryTree, updateDirectoryTree] = useState(commandContext.directoryTree);
 
   const addCommandToContext = (command) => {
     updateCommands((state) => {
@@ -14,8 +15,14 @@ export default function ProviderWrapper(props) {
     });
   }
 
+  const pwd = () => {
+    return directoryTree.join("/")
+  }
+
   const provider = {
     commands,
+    directoryTree,
+    pwd,
     addCommandToContext
   }
 
