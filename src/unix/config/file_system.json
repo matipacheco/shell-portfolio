@@ -1,0 +1,27 @@
+{
+  "home": {
+    "type": "directory",
+    "files": [],
+    "directories": [
+      {
+        "mati": {
+          "type": "directory",
+          "files": [
+            {
+              "README.md": {
+                "type": "file"
+              }
+            }
+          ],
+          "directories": [
+            {
+              "projects": {
+                "type": "directory"
+              }
+            }
+          ]
+        }
+      }    
+    ]
+  }
+}
