@@ -6,7 +6,7 @@ import ProviderWrapper from './context/CommandProvider';
 import Welcome from './placeholders/Welcome';
 
 export default function Terminal() {
-  const [showCLI, updateShowCLI] = useState(false)
+  const [showCLI, updateShowCLI] = useState(true) // TODO: toggle to false
   const CommandLine = withInput(Command);
 
   useEffect(() => {

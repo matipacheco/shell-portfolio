@@ -47,16 +47,16 @@ export const withInput = Component => {
   
     useEffect(() => {
       commandRef.current.focus();
-      commandRef.current.addEventListener("keydown", handleKeyDown)
+      commandRef.current.addEventListener("keyup", handleKeyUp)
     }, [])
 
     useEffect(() => {
       $("#command-input").siblings('p').text(input)
     }, [input])
 
-    const handleKeyDown = (event) => {
+    const handleKeyUp = (event) => {
       if (event.keyCode === 13) {
-        commandContext.addCommandToContext(input);
+        commandContext.addCommandToContext(commandRef.current.value);
         updateInput("")
       }
     }
@@ -69,7 +69,7 @@ export const withInput = Component => {
           value={input}
           ref={commandRef}
           id="command-input"
-          onChange={event => updateInput(event.target.value)}
+          onChange={() => updateInput(commandRef.current.value)}
         />
       </Component>
     )
