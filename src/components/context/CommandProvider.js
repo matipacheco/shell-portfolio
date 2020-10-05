@@ -7,7 +7,7 @@ export default function ProviderWrapper(props) {
   const [directoryTree, updateDirectoryTree] = useState(commandContext.directoryTree);
 
   const addCommandToContext = (command) => {
-    updateCommands((state) => {
+    updateCommands(state => {
       return state.concat({
         id: state.length,
         text: command
@@ -19,11 +19,25 @@ export default function ProviderWrapper(props) {
     return directoryTree.join("/")
   }
 
+  const pushInTree = (directory) => {
+    updateDirectoryTree(state => {
+      return state.concat(directory);
+    });
+  }
+
+  const popInTree = () => {
+    updateDirectoryTree(state => {
+      return state.slice(0, -1);
+    });
+  }
+
   const provider = {
     commands,
     directoryTree,
+    addCommandToContext,
     pwd,
-    addCommandToContext
+    pushInTree,
+    popInTree
   }
 
   return (

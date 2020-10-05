@@ -1,5 +1,3 @@
-$terminal-text-color: white;
-
 body {
   margin: 0;
   padding: .5rem;
@@ -29,8 +27,24 @@ code {
   font-style: normal;
 }
 
+$terminal-text-color: #0D0;
+$booting-up: ('☰', '☱', '☳', '☷', '☶', '☴');
+
 #terminal {
   color: $terminal-text-color;
+
+  .welcome {
+    margin-bottom: 1rem;
+
+    .booting-up {
+      animation: $booting-up 700ms steps(1, end) infinite;
+    }
+
+    p {
+      padding: 1px 0;
+      display: block;
+    }
+  }
 
   p {
     margin: 0;
@@ -38,7 +52,6 @@ code {
   }
 
   .command {
-    color: #0D0;
     padding-bottom: 0.1rem;
 
     input {

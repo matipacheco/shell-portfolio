@@ -1,19 +1,19 @@
 import React, {
-  useState, useRef, useEffect, useContext, Fragment
+  useRef, useEffect, useContext, Fragment, useState
 } from 'react';
 import $ from 'jquery';
 import { CommandContext } from './context/CommandContext';
 
-function Cursor() {
-  return (
-    <span className="cursor"/>
-  );
-}
+const Cursor = () => <span className="cursor"/>;
 
 export function Command(props) {
+  const commandContext = useContext(CommandContext);
+
   return (
     <div className="command">
-      &gt; &nbsp;
+      &gt;&nbsp;
+      {commandContext.pwd()}
+      &nbsp;$&nbsp;
       <p>
         {props.text}
       </p>
@@ -42,6 +42,7 @@ export function CommandList() {
 export const withInput = Component => {
   return function() {
     let commandRef = useRef(null);
+    const [input, updateInput] = useState("");
     const commandContext = useContext(CommandContext);
   
     useEffect(() => {
@@ -49,18 +50,14 @@ export const withInput = Component => {
       commandRef.current.addEventListener("keydown", handleKeyDown)
     }, [])
 
-    const printCommand = (command) => {
-      $("#command-input").siblings('p').text(command)
-    }
+    useEffect(() => {
+      $("#command-input").siblings('p').text(input)
+    }, [input])
 
     const handleKeyDown = (event) => {
       if (event.keyCode === 13) {
-        commandContext.addCommandToContext(event.target.value);
-        $("#command-input").val('');
-        printCommand("")
-
-      } else {
-        printCommand(event.target.value);
+        commandContext.addCommandToContext(input);
+        updateInput("")
       }
     }
   
@@ -69,8 +66,10 @@ export const withInput = Component => {
         <Cursor />
         <input
           type="text"
+          value={input}
           ref={commandRef}
           id="command-input"
+          onChange={event => updateInput(event.target.value)}
         />
       </Component>
     )
