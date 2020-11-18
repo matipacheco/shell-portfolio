@@ -1,23 +1,19 @@
 {
-  "home": {
-    "type": "directory",
+  "name": "home",
+  "content": {
     "files": [],
     "directories": [
       {
-        "mati": {
-          "type": "directory",
+        "name": "mati",
+        "content": {
           "files": [
             {
-              "README.md": {
-                "type": "file"
-              }
+              "name": "README.md"
             }
           ],
           "directories": [
             {
-              "projects": {
-                "type": "directory"
-              }
+              "name": "projects"
             }
           ]
         }

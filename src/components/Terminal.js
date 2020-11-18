@@ -6,7 +6,7 @@ import ProviderWrapper from './context/CommandProvider';
 import Welcome from './placeholders/Welcome';
 
 export default function Terminal() {
-  const [showCLI, updateShowCLI] = useState(true) // TODO: toggle to false
+  const [showCLI, updateShowCLI] = useState(false)
   const CommandLine = withInput(Command);
 
   useEffect(() => {
@@ -23,6 +23,7 @@ export default function Terminal() {
     <ProviderWrapper>
       <div id="terminal">
         <Welcome onBootComplete={onBootComplete} />
+
         {
           showCLI &&
           <Fragment>

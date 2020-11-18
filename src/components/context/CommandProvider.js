@@ -1,6 +1,11 @@
 import React, { useState, useContext } from 'react';
 import { CommandContext, CommandProvider } from './CommandContext';
 
+import {
+  pwd as unixPwd,
+  ls as unixLs
+} from '../../unix/file_system_handler';
+
 export default function ProviderWrapper(props) {
   const commandContext = useContext(CommandContext);
   const [commands, updateCommands] = useState(commandContext.commands);
@@ -16,7 +21,8 @@ export default function ProviderWrapper(props) {
   }
 
   const pwd = () => {
-    return directoryTree.join("/")
+    unixLs(directoryTree)
+    return unixPwd(directoryTree);
   }
 
   const pushInTree = (directory) => {
